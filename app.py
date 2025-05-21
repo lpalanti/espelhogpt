@@ -10,6 +10,9 @@ from google.auth.credentials import Credentials
 # Configuração da API do ChatGPT
 openai.api_key = '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'
 
+# Escopos necessários para acessar o Gmail
+SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
+
 # Recuperando o conteúdo do 'client_secret.json' da variável de ambiente
 client_secret_json = os.getenv('GOOGLE_CLIENT_SECRET')
 
@@ -62,7 +65,7 @@ def get_chatgpt_response(prompt):
     )
     return response.choices[0].text.strip()
 
-# Streamlit interface
+# Interface Streamlit
 st.title("ChatGPT com Google OAuth 2.0")
 
 if st.button('Login com Gmail'):
@@ -78,3 +81,4 @@ if user_input:
     response = get_chatgpt_response(user_input)
     st.write("Resposta do ChatGPT:")
     st.write(response)
+
